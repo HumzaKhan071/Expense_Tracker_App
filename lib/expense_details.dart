@@ -43,18 +43,20 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                     FlatButton(onPressed: (){
+                       Navigator.pop(context);
+                     }, child:  Text(
                         "< Back",
                         style: TextStyle(
                           color: activeColor,
                           fontSize: 20,
                         ),
-                      ),
+                      ),),
                       CircleAvatar(
                         backgroundColor: Color(0xff0E164C),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child: Image.asset("assets/images/user.jpg"),
+                          child: Image.asset("assets/images/user.jpeg"),
                         ),
                       )
                     ],
