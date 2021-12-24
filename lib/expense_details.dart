@@ -5,15 +5,12 @@ final Color activeColor = Color(0xffFF2E63);
 final Color inactiveColor = Color(0xff6C73AE);
 
 class ExpenseDetails extends StatefulWidget {
-  const ExpenseDetails({Key? key}) : super(key: key);
-
   @override
   _ExpenseDetailsState createState() => _ExpenseDetailsState();
 }
 
 class _ExpenseDetailsState extends State<ExpenseDetails> {
-  late String selection;
-
+  String selection;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,145 +18,158 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
       body: Stack(
         children: [
           Positioned(
-              top: 0,
-              right: 0,
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.4,
-                width: MediaQuery.of(context).size.width * 0.4,
-                decoration: BoxDecoration(
-                    color: Color(0xff0E164C),
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(100))),
-              )),
+            top: 0,
+            right: 0,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.4,
+              width: MediaQuery.of(context).size.width * 0.4,
+              decoration: BoxDecoration(
+                color: Color(0xff0E164C),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(100),
+                ),
+              ),
+            ),
+          ),
           SafeArea(
-              child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
                         "< Back",
                         style: TextStyle(
                           color: activeColor,
                           fontSize: 20,
                         ),
                       ),
-                    ),
-                    CircleAvatar(
-                        backgroundColor: Color(0xff0164C),
+                      CircleAvatar(
+                        backgroundColor: Color(0xff0E164C),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child: Image.asset("assets/images/user.jpeg"),
-                        ))
-                  ],
+                          child: Image.asset("assets/images/user.jpg"),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                child: Swiper(
-                    itemBuilder: (context, index) => Card(index: index),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: Swiper(
+                    itemBuilder: (ctx, idx) => Card(
+                      index: idx,
+                    ),
                     curve: Curves.ease,
-                    pagination:
-                        new SwiperPagination(builder: SwiperPagination.rect),
-                    itemCount: cardList.length),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
+                    pagination: new SwiperPagination(
+                      builder: SwiperPagination.rect,
+                    ),
+                    itemCount: cardList.length,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Expanded(
                   child: Container(
-                padding: EdgeInsets.all(20),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Color(0xff0E164C),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
-                    )),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 5,
-                      width: 100,
-                      color: Colors.white,
+                    padding: EdgeInsets.all(20),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Color(0xff0E164C),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
                       children: [
-                        Text(
-                          "Transactions",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500),
+                        Container(
+                          height: 5,
+                          width: 100,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 30,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Sort By",
+                              "Transactions",
                               style: TextStyle(
-                                color: inactiveColor,
-                                fontSize: 18,
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            DropdownButton(
-                                value: selection,
-                                hint: Text(
-                                  "Choose",
+                            Row(
+                              children: [
+                                Text(
+                                  "Sort By",
                                   style: TextStyle(
-                                    color: activeColor.withOpacity(0.5),
-                                    fontSize: 17,
+                                    color: inactiveColor,
+                                    fontSize: 18,
                                   ),
                                 ),
-                                dropdownColor: Color(0xff010A43),
-                                iconEnabledColor: activeColor,
-                                style:
-                                    TextStyle(color: activeColor, fontSize: 17),
-                                items: listItems
-                                    .map((e) => DropdownMenuItem(
-                                          value: e,
-                                          child: Text(e),
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    selection = value;
-                                  });
-                                })
+                                SizedBox(width: 10),
+                                DropdownButton(
+                                  value: selection,
+                                  hint: Text(
+                                    "Choose",
+                                    style: TextStyle(
+                                      color: activeColor.withOpacity(0.5),
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                  dropdownColor: Color(0xff010A43),
+                                  iconEnabledColor: activeColor,
+                                  style: TextStyle(
+                                    color: activeColor,
+                                    fontSize: 17,
+                                  ),
+                                  items: listItems.map((e) {
+                                    return DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selection = value;
+                                    });
+                                  },
+                                ),
+                              ],
+                            )
                           ],
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemBuilder: (ctx, i) => TransactionTile(
+                              amount: transactions[i].price,
+                              imageUrl: transactions[i].image,
+                              name: transactions[i].name,
+                              paid: transactions[i].paid,
+                            ),
+                            itemCount: transactions.length,
+                          ),
                         )
                       ],
                     ),
-                    Expanded(
-                        child: ListView.builder(
-                            itemCount: transactions.length,
-                            itemBuilder: (context, index) {
-                              return TransactionTile(
-                                  imageUrl: transactions[index].image,
-                                  name: transactions[index].name,
-                                  amount: transactions[index].price,
-                                  paid: transactions[index].paid);
-                            }))
-                  ],
-                ),
-              ))
-            ],
-          ))
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -168,17 +178,11 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
 
 class Cards {
   String image;
-
   String name;
   double amount;
   int cardNumber;
 
-  Cards({
-    required this.image,
-    required this.name,
-    required this.amount,
-    required this.cardNumber,
-  });
+  Cards({this.amount, this.cardNumber, this.image, this.name});
 }
 
 List<Cards> cardList = [
@@ -193,16 +197,13 @@ List<Cards> cardList = [
     amount: 532.71,
     cardNumber: 8137,
     name: "Visa Card",
-  )
+  ),
 ];
-
-List<String> listItems = ["Recent", "Amount", "Ascending", "Descending"];
 
 class Card extends StatelessWidget {
   int index;
 
-  Card({required this.index});
-
+  Card({this.index});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -227,7 +228,10 @@ class Card extends StatelessWidget {
               children: [
                 Text(
                   cardList[index].name,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -249,7 +253,10 @@ class Card extends StatelessWidget {
                 ),
                 Text(
                   "\$${cardList[index].amount}",
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 30,
+                  ),
                 )
               ],
             ),
@@ -260,59 +267,56 @@ class Card extends StatelessWidget {
   }
 }
 
+List<String> listItems = ["Recent", "Amount", "Ascending", "Descending"];
+
 class Transaction {
   String image;
   String name;
   bool paid;
   double price;
-  Transaction({
-    required this.image,
-    required this.name,
-    required this.paid,
-    required this.price,
-  });
+
+  Transaction({this.image, this.name, this.paid, this.price});
 }
 
 List<Transaction> transactions = [
   Transaction(
-      image: "assets/images/friend1.jpg",
-      name: "Abdullah Khan",
-      paid: true,
-      price: 750),
+    image: "assets/images/friend1.jpg",
+    name: "Ayush gupta",
+    paid: true,
+    price: 750,
+  ),
   Transaction(
-      image: "assetsimages/friend2.jfif",
-      name: "Hammad Ahmed",
-      paid: false,
-      price: 550),
+    image: "assets/images/friend5.png",
+    name: "Alena Lopez",
+    paid: false,
+    price: 50,
+  ),
   Transaction(
-      image: "assetsimages/friend3.jfif",
-      name: "Hamza Ilyas",
-      paid: true,
-      price: 450),
+    image: "assets/images/friend2.jfif",
+    name: "Sheldon Cooper",
+    paid: false,
+    price: 430,
+  ),
   Transaction(
-      image: "assets/images/friend5.png",
-      name: "Urwah",
-      paid: false,
-      price: 250),
+    image: "assets/images/friend6.png",
+    name: "Mia .......",
+    paid: true,
+    price: 150,
+  ),
   Transaction(
-      image: "assetsimages/friend6.png",
-      name: "Arfeen Khan",
-      paid: true,
-      price: 850),
+    image: "assets/images/friend3.jfif",
+    name: "Bennedict Holmes",
+    paid: false,
+    price: 72,
+  ),
 ];
 
 class TransactionTile extends StatelessWidget {
   final String imageUrl, name;
   final double amount;
   final bool paid;
-  const TransactionTile(
-      {Key? key,
-      required this.imageUrl,
-      required this.name,
-      required this.amount,
-      required this.paid})
-      : super(key: key);
 
+  TransactionTile({this.amount, this.imageUrl, this.name, this.paid});
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -328,14 +332,20 @@ class TransactionTile extends StatelessWidget {
       ),
       title: Text(
         name,
-        style: TextStyle(color: inactiveColor, fontSize: 18),
+        style: TextStyle(
+          color: inactiveColor,
+          fontSize: 18,
+        ),
       ),
       subtitle: Status(
         status: paid,
       ),
       trailing: Text(
-        "\$${amount}",
-        style: TextStyle(fontSize: 24, color: Colors.white),
+        "\$$amount",
+        style: TextStyle(
+          fontSize: 24,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -343,12 +353,14 @@ class TransactionTile extends StatelessWidget {
 
 class Status extends StatelessWidget {
   bool status;
-  Status({Key? key, required this.status}) : super(key: key);
-
+  Status({this.status});
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 5, right: 75),
+      margin: EdgeInsets.only(
+        top: 5,
+        right: 75,
+      ),
       height: 28,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
@@ -356,20 +368,18 @@ class Status extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(
-            width: 5,
-          ),
+          SizedBox(width: 3),
           Icon(
             Icons.check_circle,
             color: Colors.white,
           ),
-          SizedBox(
-            width: 5,
-          ),
+          SizedBox(width: 5),
           Text(
-            status ? "Paid" : "Received",
-            style: TextStyle(color: Colors.white),
-          ),
+            status ? "Paid" : "Recieved",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          )
         ],
       ),
     );

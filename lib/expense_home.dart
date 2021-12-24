@@ -8,7 +8,7 @@ final Color activeColor = Color(0xffFF2E63);
 final Color inactiveColor = Color(0xff6C73AE);
 
 class ExpenseHome extends StatefulWidget {
-  const ExpenseHome({Key? key}) : super(key: key);
+  const ExpenseHome({Key key}) : super(key: key);
 
   @override
   _ExpenseHomeState createState() => _ExpenseHomeState();
@@ -300,7 +300,7 @@ class Bar extends StatelessWidget {
   double fill;
   String day;
   Color color;
-  Bar({Key? key, required this.fill, required this.day, required this.color})
+  Bar({Key key,  this.fill,  this.day, this.color})
       : super(key: key);
 
   @override
